@@ -2,8 +2,10 @@ package kr.hs.study.studybackendkotlin.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.Table
 
 @Entity
+@Table(name = "users")
 class User(
     var name: String,
 
