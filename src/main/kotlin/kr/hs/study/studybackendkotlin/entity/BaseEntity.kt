@@ -1,12 +1,7 @@
 package kr.hs.study.studybackendkotlin.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.EntityListeners
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.MappedSuperclass
+import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
@@ -23,5 +18,5 @@ open class BaseEntity (
     var createdDate: LocalDateTime? = null,
 
     @LastModifiedDate
-    var lastModifiedBy: LocalDateTime? = null
+    var modifiedDate: LocalDateTime? = null
 )
