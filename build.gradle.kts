@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.jpa") version "1.9.24"
     kotlin("jvm") version "1.9.24"
     kotlin("plugin.spring") version "1.9.24"
+    kotlin("kapt") version "1.9.24"
 }
 
 group = "kr.hs.study"
@@ -34,6 +35,10 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    // querydsl
+    implementation("com.querydsl:querydsl-jpa:5.0.0")
+    kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 }
 
 kotlin {
