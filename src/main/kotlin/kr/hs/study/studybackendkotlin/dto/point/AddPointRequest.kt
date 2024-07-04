@@ -4,7 +4,7 @@ import kr.hs.study.studybackendkotlin.entity.Point
 import kr.hs.study.studybackendkotlin.entity.User
 import org.jetbrains.annotations.NotNull
 
-class AddPointRequest(
+data class AddPointRequest(
     @field:NotNull
     val variation: Long,
 
