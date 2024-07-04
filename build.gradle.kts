@@ -38,11 +38,9 @@ dependencies {
 
     // querydsl
     implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
-    implementation("com.querydsl:querydsl-apt:5.0.0:jakarta")
-    implementation("jakarta.persistence:jakarta.persistence-api")
-    implementation("jakarta.annotation:jakarta.annotation-api")
     kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
-    kapt("org.springframework.boot:spring-boot-configuration-processor")
+    kapt("jakarta.annotation:jakarta.annotation-api")
+    kapt("jakarta.persistence:jakarta.persistence-api")
 }
 
 kotlin {
