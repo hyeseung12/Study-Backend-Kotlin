@@ -4,6 +4,7 @@ import kr.hs.study.studybackendkotlin.annotation.TransactionalService
 import kr.hs.study.studybackendkotlin.dto.point.AddPointRequest
 import kr.hs.study.studybackendkotlin.repository.point.PointRepository
 import kr.hs.study.studybackendkotlin.repository.user.UserRepository
+import org.springframework.data.repository.findByIdOrNull
 
 @TransactionalService
 class PostPointService(
@@ -11,9 +12,9 @@ class PostPointService(
     private val userRepository: UserRepository
 ) {
     fun execute(request: AddPointRequest) {
-        if(!userRepository.existsById(request.user.id))
-            throw RuntimeException("user not found")
+        val user = userRepository.findByIdOrNull(request.userId)
+            ?: throw RuntimeException("user not found")
 
-        pointRepository.save(request.toEntity())
+        pointRepository.save(request.toEntity(user))
     }
 }

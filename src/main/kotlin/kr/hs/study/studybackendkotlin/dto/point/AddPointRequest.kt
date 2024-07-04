@@ -12,10 +12,10 @@ data class AddPointRequest(
     val balance: Long,
 
     @field:NotNull
-    val user: User
+    val userId: Long
 ) {
 
-    fun toEntity() = Point(
+    fun toEntity(user: User) = Point(
         variation = variation,
         balance = balance,
         user = user
