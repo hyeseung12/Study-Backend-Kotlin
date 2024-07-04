@@ -6,6 +6,7 @@ import kr.hs.study.studybackendkotlin.dto.user.LoginUserRequest
 import kr.hs.study.studybackendkotlin.dto.user.UpdateUserRequest
 import kr.hs.study.studybackendkotlin.dto.user.UserResponse
 import kr.hs.study.studybackendkotlin.service.user.*
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -28,7 +29,7 @@ class UserController(
     @PostMapping
     fun addUser(@Valid @RequestBody request: AddUserRequest): ResponseEntity<Void> {
         postUserService.execute(request)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 
     @PostMapping("/login")
