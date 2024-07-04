@@ -4,10 +4,12 @@ import jakarta.validation.Valid
 import kr.hs.study.studybackendkotlin.dto.user.AddUserRequest
 import kr.hs.study.studybackendkotlin.dto.user.LoginUserRequest
 import kr.hs.study.studybackendkotlin.dto.user.UserResponse
+import kr.hs.study.studybackendkotlin.service.user.DeleteUserService
 import kr.hs.study.studybackendkotlin.service.user.GetUserService
 import kr.hs.study.studybackendkotlin.service.user.LoginUserService
 import kr.hs.study.studybackendkotlin.service.user.PostUserService
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -20,7 +22,8 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(
     private val postUserService: PostUserService,
     private val loginUserService: LoginUserService,
-    private val getUserService: GetUserService
+    private val getUserService: GetUserService,
+    private val deleteUserService: DeleteUserService
 ) {
     @PostMapping
     fun addUser(@Valid @RequestBody request: AddUserRequest): ResponseEntity<Void> {
@@ -38,5 +41,11 @@ class UserController(
     fun getUser(@PathVariable id: Long): ResponseEntity<UserResponse> {
         val user = getUserService.execute(id)
         return ResponseEntity.ok(user)
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteUser(@PathVariable id:Long): ResponseEntity<UserResponse> {
+        val user = deleteUserService.execute(id)
+        return ResponseEntity.ok().build()
     }
 }
