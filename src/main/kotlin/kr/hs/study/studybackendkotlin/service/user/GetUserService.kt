@@ -10,6 +10,11 @@ class GetUserService(
     private val userRepository: UserRepository
 ) {
     fun execute(id: Long): UserResponse {
+        /*
+            - java 스타일
+            userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION)
+        */
         val user = userRepository.findByIdOrNull(id)
             ?: throw RuntimeException("user not found")
 
