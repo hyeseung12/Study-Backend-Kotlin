@@ -16,7 +16,7 @@ data class AddUserRequest(
     val email: String,
 
     @field:NotBlank
-    val password: String
+    var password: String
 ) {
 
     fun toEntity() = User(
@@ -25,5 +25,9 @@ data class AddUserRequest(
         email = email,
         password = password
     )
+
+    fun updatePassword(password: String) {
+        this.password = password
+    }
 
 }
