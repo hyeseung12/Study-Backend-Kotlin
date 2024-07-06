@@ -26,8 +26,4 @@ data class AddUserRequest(
         password = password
     )
 
-    fun updatePassword(password: String) {
-        this.password = password
-    }
-
 }
