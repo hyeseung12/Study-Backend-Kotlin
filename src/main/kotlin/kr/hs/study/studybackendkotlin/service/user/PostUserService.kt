@@ -3,14 +3,18 @@ package kr.hs.study.studybackendkotlin.service.user
 import kr.hs.study.studybackendkotlin.annotation.TransactionalService
 import kr.hs.study.studybackendkotlin.dto.user.AddUserRequest
 import kr.hs.study.studybackendkotlin.repository.user.UserRepository
+import org.springframework.security.crypto.password.PasswordEncoder
 
 @TransactionalService
 class PostUserService(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val passwordEncoder: PasswordEncoder
 ) {
     fun execute(request: AddUserRequest) {
         duplicateUserId(request.userId)
         duplicateEmail(request.email)
+
+        request.password = passwordEncoder.encode(request.password)
 
         userRepository.save(request.toEntity())
     }
