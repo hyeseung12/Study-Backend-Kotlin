@@ -8,6 +8,14 @@ import kr.hs.study.studybackendkotlin.entity.User
 class UserRepositoryImpl(
     private val jpaQueryFactory: JPAQueryFactory
 ) : UserRepositoryCustom {
+    override fun findByUserId(userId: String): User {
+        return jpaQueryFactory
+            .selectFrom(user)
+            .where(
+                userIdEq(userId)
+            )
+            .fetchFirst()
+    }
 
     override fun findByUserIdOrEmail(userId: String, email: String): User {
         return jpaQueryFactory
