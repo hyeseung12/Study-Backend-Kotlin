@@ -16,8 +16,8 @@ class JwtTokenFilter (
         filterChain: FilterChain
     ) {
         val token: String? = jwtTokenProvider.resolveToken(request) // 1. 토큰 디코딩
-        token.let {
-            val authentication: Authentication = jwtTokenProvider.authorization(token!!)
+        token?.let {
+            val authentication: Authentication = jwtTokenProvider.authorization(token)
             SecurityContextHolder.getContext().authentication = authentication // 2. 토큰 사용자 권한 줌
         }
         filterChain.doFilter(request, response)

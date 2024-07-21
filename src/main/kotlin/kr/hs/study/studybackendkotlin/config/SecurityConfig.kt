@@ -1,5 +1,7 @@
 package kr.hs.study.studybackendkotlin.config
 
+import kr.hs.study.studybackendkotlin.security.jwt.JwtTokenFilter
+import kr.hs.study.studybackendkotlin.security.jwt.JwtTokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpStatus
@@ -11,10 +13,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @EnableWebSecurity
 @Configuration
-class SecurityConfig {
+class SecurityConfig(
+    private val jwtTokenProvider: JwtTokenProvider
+) {
     @Bean
     fun encoder(): PasswordEncoder =
         BCryptPasswordEncoder()
@@ -35,6 +40,8 @@ class SecurityConfig {
                 authenticationEntryPoint = HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)
             }
         }
+
+        http.addFilterBefore(JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
 
         return http.build()
     }

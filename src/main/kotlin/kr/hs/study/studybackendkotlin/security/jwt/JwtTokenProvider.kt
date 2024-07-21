@@ -57,7 +57,7 @@ class JwtTokenProvider(
 
     // 토큰 디코딩
     fun resolveToken(request: HttpServletRequest): String? {
-        val bearer: String = request.getHeader(jwtProperties.header)
+        val bearer: String? = request.getHeader(jwtProperties.header)
         return parseToken(bearer)
     }
 
