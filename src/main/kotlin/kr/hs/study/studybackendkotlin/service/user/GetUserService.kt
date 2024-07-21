@@ -2,6 +2,7 @@ package kr.hs.study.studybackendkotlin.service.user
 
 import kr.hs.study.studybackendkotlin.annotation.ReadOnlyService
 import kr.hs.study.studybackendkotlin.dto.user.UserResponse
+import kr.hs.study.studybackendkotlin.exception.UserNotFoundException
 import kr.hs.study.studybackendkotlin.repository.user.UserRepository
 import org.springframework.data.repository.findByIdOrNull
 
@@ -16,7 +17,7 @@ class GetUserService(
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION)
         */
         val user = userRepository.findByIdOrNull(id)
-            ?: throw RuntimeException("user not found")
+            ?: throw UserNotFoundException()
 
         return UserResponse(user)
     }
