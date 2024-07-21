@@ -34,6 +34,8 @@ class SecurityConfig(
                 sessionCreationPolicy = SessionCreationPolicy.STATELESS
             }
             authorizeRequests {
+                authorize("/user", authenticated)
+                authorize("/point", authenticated)
                 authorize(anyRequest, permitAll)
             }
             exceptionHandling {

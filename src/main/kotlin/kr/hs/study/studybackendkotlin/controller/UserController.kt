@@ -1,6 +1,7 @@
 package kr.hs.study.studybackendkotlin.controller
 
 import jakarta.validation.Valid
+import kr.hs.study.studybackendkotlin.dto.auth.TokenResponse
 import kr.hs.study.studybackendkotlin.dto.user.AddUserRequest
 import kr.hs.study.studybackendkotlin.dto.user.LoginUserRequest
 import kr.hs.study.studybackendkotlin.dto.user.UpdateUserRequest
@@ -8,14 +9,7 @@ import kr.hs.study.studybackendkotlin.dto.user.UserResponse
 import kr.hs.study.studybackendkotlin.service.user.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/user")
@@ -26,14 +20,14 @@ class UserController(
     private val updateUserService: UpdateUserService,
     private val deleteUserService: DeleteUserService,
 ) {
-    @PostMapping
+    @PostMapping("/signup")
     fun addUser(@Valid @RequestBody request: AddUserRequest): ResponseEntity<Void> {
         postUserService.execute(request)
         return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 
     @PostMapping("/login")
-    fun loginUser(@Valid @RequestBody request: LoginUserRequest): ResponseEntity<UserResponse> {
+    fun loginUser(@Valid @RequestBody request: LoginUserRequest): ResponseEntity<TokenResponse> {
         val user = loginUserService.execute(request)
         return ResponseEntity.ok(user)
     }
