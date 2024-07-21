@@ -44,6 +44,10 @@ dependencies {
     // database - postgresql
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("com.h2database:h2")
+
+    // database - redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
 }
 
 kotlin {
