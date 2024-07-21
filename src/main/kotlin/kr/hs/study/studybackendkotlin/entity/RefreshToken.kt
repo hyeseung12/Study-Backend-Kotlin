@@ -7,5 +7,5 @@ import org.springframework.data.redis.core.RedisHash
 class RefreshToken(
     @Id
     val token: String,
-    val userId: Long
+    val userId: String
 )
